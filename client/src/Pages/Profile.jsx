@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AccountSettings from '../components/AccountSettings';
+import History from '../components/History';
 import '../styles/Profile.css';
 
 function Profile({ user }) {
@@ -53,8 +54,7 @@ function Profile({ user }) {
                         <AccountSettings />
                     </div>
                     <div className={`tab-content ${activeTab === 'orders' ? 'active' : ''}`} id="orders">
-                        <h4>History</h4>
-                        {/* Add content here */}
+                        <History />
                     </div>
                 </div>
             </div>
