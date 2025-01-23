@@ -1,20 +1,31 @@
 import React, { useRef, useState } from 'react'
 import '../../styles/Upload.css'
 
+
 export default function Upload() {
     const fileInputRef = useRef(null);
     const [fileName, setFileName] = useState('');
+    const [fileURL, setFileURL] = useState('');
+    const [fileType, setFileType] = useState('');
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
 
     const handleButtonClick = () => {
         fileInputRef.current.click();
-    }
+    };
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setFileName(file.name); 
+            setFileName(file.name);
+            setFileType(file.type);
+            const fileURL = URL.createObjectURL(file);
+            setFileURL(fileURL);
         }
-    }
+    };
+
+    const closePopup = () => {
+        setIsPopupVisible(false);
+    };
 
     return (
         <div id="demo" className="demo-container">
@@ -44,51 +55,62 @@ export default function Upload() {
                                 />
                                 {fileName && <p className="file-name">Selected file: {fileName}</p>}
                             </div>
-                        </div>
 
-                        <div className="grid-container">
-                            <div className="grid-item">
-                                <div className="grid-content">
-                                    <span className="grid-label">Detection Status</span>
-                                    <span className="status-icon"><svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-activity h-5 w-5 text-green-500"
-                                    >
-                                        <path d="M22 12h-4l-3 9L9 3 6 12H2" />
-                                    </svg>
-                                    </span>
-                                </div>
-                                <p className="grid-value">Active</p>
-                            </div>
-
-                            <div className="grid-item">
-                                <div className="grid-content">
-                                    <span className="grid-label">Confidence Score</span>
-                                    <span className="status-icon">📊</span>
-                                </div>
-                                <p className="grid-value">98%</p>
-                            </div>
-
-                            <div className="grid-item">
-                                <div className="grid-content">
-                                    <span className="grid-label">Processing Time</span>
-                                    <span className="status-icon">⏱</span>
-                                </div>
-                                <p className="grid-value">0.5s</p>
+                            <div className="file-preview">
+                                {fileType.startsWith('image') && (
+                                    <img
+                                        src={fileURL}
+                                        alt="Uploaded File"
+                                        style={{ width: '200px', marginTop: '10px' }}
+                                    />
+                                )}
+                                <br />
+                                {fileName && (
+                                    <button className="upload-button" onClick={() => setIsPopupVisible(true)}>
+                                        Submit
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    )
+            {/* Conditionally render the Popup based on state */}
+            {isPopupVisible && (
+                <div>
+                    <div 
+                        style={{
+                            padding: '20px',
+                            border: '1px solid black',
+                            backgroundColor: 'lightgray',
+                            position: 'fixed',
+                            top: '500px',
+                            left: '800px',
+                            //transform: 'translate(-50%, -50%)',
+                            zIndex: 1000,
+                            alignContent: 'center'
+                        }}
+                    >
+                        <p>This is a pop-up window!</p>
+                        <button className='upload-button' onClick={closePopup}>Close</button>
+                    </div>
+
+                    <div 
+                        style={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            zIndex: 999,
+                            alignContent: 'center'
+                        }}
+                        onClick={closePopup}
+                    />
+                </div>
+            )}
+        </div>
+    );
 }
