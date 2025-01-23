@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import AccountSettings from '../components/AccountSettings';
-import History from '../components/History';
+import AccountSettings from '../components/Profile/AccountSettings'
+import History from '../components/Profile/History';
 import '../styles/Profile.css';
 
 function Profile({ user }) {

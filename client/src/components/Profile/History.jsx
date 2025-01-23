@@ -1,6 +1,6 @@
 import React from "react";
-import "../styles/History.css";
-import image from'../assets/pothole.jpg'
+import "../../styles/History.css";
+import image from'../../assets/pothole.jpg'
 export default function History() {
     const UploadCard = ({ img, result, dateTime }) => {
         return (

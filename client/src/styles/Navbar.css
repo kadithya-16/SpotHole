@@ -130,13 +130,10 @@
 }
 
 .icon-container .contact::before {
-    content: " Let's Talk →";
+    content: " Visit Us →";
     transition: .2s ease;
 }
 
-.icon-container .contact:hover:before {
-    content: "→ Let's Talk";
-}
 
 @keyframes fadeIn {
     from {

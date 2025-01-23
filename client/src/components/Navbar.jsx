@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import '../styles/Navbar.css';
+import '../styles/Navbar.css'
 import logo from '../assets/logo.png'
 
 export default function Navbar() {
@@ -44,7 +44,7 @@ export default function Navbar() {
                 <NavLink className={(e) => e.isActive ? "active" : ""} to='/profile'>PROFILE</NavLink>
             </nav>
             <div className="icon-container">
-                <a href="#contact" className="contact"></a>
+                <a href="" className="contact"></a>
                 <a aria-label="Lightmode">
                     <i className="fa-brands fa-github icon"></i>
                 </a>
@@ -53,34 +53,4 @@ export default function Navbar() {
     )
 }
 
-
-
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-
-// function Navbar({ user, onLogout }) {
-//   return (
-//     <nav className="navbar">
-//       <div className="logo">
-//         <Link to="/">SpotHole</Link>
-//       </div>
-//       <div className="menu">
-//         <Link to="/">Home</Link>
-//         <Link to="/about">About</Link>
-//         <Link to="/documentation">Docs</Link>
-//         <Link to="/profile">Profile</Link>
-//         {user ? (
-//           <>
-//             <span>Welcome, {user.username}!</span>
-//             <button onClick={onLogout}>Logout</button>
-//           </>
-//         ) : (
-//           <Link to="/login">Login</Link>
-//         )}
-//       </div>
-//     </nav>
-//   );
-// }
-
-// export default Navbar;
 
