@@ -8,6 +8,8 @@ const auth = require('./routes/auth');
 const app = express();
 const PORT = 3000;
 
+
+// middleware
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api/v1/auth',auth);
@@ -26,7 +28,7 @@ mongoose.connect('mongodb://localhost:27017/Spothole')
 
 
 
-
+// establishing the connection
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
