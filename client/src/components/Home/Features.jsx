@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import '../styles/Features.css';
+import '../../styles/Features.css';
 
 export default function Features() {
     const FeatureCard = ({ iconClass, title, description }) => (

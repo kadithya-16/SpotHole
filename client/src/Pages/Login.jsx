@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import '../styles/Auth.css';  // Importing the combined CSS
+import '../styles/Auth.css'; 
 
 function Login({ onAuthSuccess }) {
     const [formData, setFormData] = useState({

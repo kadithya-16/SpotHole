@@ -1,8 +1,8 @@
 import React from 'react'
-import Features from '../components/Features.jsx';
+import Features from './Features.jsx';
 import { NavLink } from 'react-router-dom';
-import '../styles/About.css'
-import image from '../assets/pothole.jpg'
+import '../../styles/About.css'
+import image from '../../assets/pothole.jpg'
 
 const Stat = ({ value, label }) => (
     <div className="stat">
