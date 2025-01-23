@@ -5,6 +5,7 @@ import About from '../components/Home/About.jsx';
 import Upload from '../components/Home/Upload.jsx';
 import Footer from '../components/Footer.jsx';
 
+
 function Home() {
   return (
     <>
