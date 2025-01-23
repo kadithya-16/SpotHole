@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
-import '../styles/Upload.css';
+import React, { useRef, useState } from 'react'
+import '../../styles/Upload.css'
+
 
 export default function Upload() {
     const fileInputRef = useRef(null);
@@ -31,7 +32,7 @@ export default function Upload() {
             <div className="demo-inner">
                 <div className="text-center">
                     <p className="demo-subtitle">
-                        See It In Action
+                        See it in Action
                     </p>
                 </div>
 

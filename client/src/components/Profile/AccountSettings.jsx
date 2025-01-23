@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/AccountSettings.css';
+import '../../styles/AccountSettings.css';
 
 function AccountSettings() {
     const [selectedOption, setSelectedOption] = useState('changePassword');

@@ -4,7 +4,6 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import Home from './Pages/Home';
 import Description from './Pages/Description';
 import Docs from './Pages/Docs';
-import History from './Pages/History';
 import Team from './Pages/Team';
 import Profile from './Pages/Profile';
 import Login from './Pages/Login';
