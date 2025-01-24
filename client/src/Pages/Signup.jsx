@@ -1,32 +1,54 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import '../styles/Auth.css';  // Importing the combined CSS
+import { Link, useNavigate } from 'react-router-dom'; // Added useNavigate
+import '../styles/Auth.css';
 
 function Signup({ onAuthSuccess }) {
     const [formData, setFormData] = useState({
-        username: '',
+        name: '',
         email: '',
         password: '',
         confirmPassword: ''
     });
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const navigate = useNavigate(); // Initialize useNavigate
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
-            setError('Please fill in all fields');
-            return;
+        setError('');
+        setSuccessMessage('');
+
+        try {
+            const response = await fetch('http://localhost:3000/api/v1/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setSuccessMessage('Signup successful! Redirecting to login...');
+                setFormData({
+                    name: '',
+                    email: '',
+                    password: '',
+                    confirmPassword: ''
+                });
+
+                // Redirect to the login page after a short delay
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2500); // 1.5 seconds delay
+            } else {
+                setError(data.message || 'Signup failed');
+            }
+        } catch (err) {
+            console.error('Error during signup:', err);
+            setError('An error occurred. Please try again later.');
         }
-        if (formData.password !== formData.confirmPassword) {
-            setError('Passwords do not match');
-            return;
-        }
-        onAuthSuccess({
-            username: formData.username,
-            email: formData.email,
-            password: formData.password,
-            // Add other user data as needed
-        });
     };
 
     const handleChange = (e) => {
@@ -41,15 +63,16 @@ function Signup({ onAuthSuccess }) {
             <div className="auth-box">
                 <h2>Create Account</h2>
                 {error && <div className="error-message">{error}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label>Username</label>
+                        <label>Name</label>
                         <input
                             type="text"
-                            name="username"
-                            value={formData.username}
+                            name="name"
+                            value={formData.name}
                             onChange={handleChange}
-                            placeholder="Choose a username"
+                            placeholder="Enter your name"
                         />
                     </div>
                     <div className="form-group">
@@ -85,7 +108,7 @@ function Signup({ onAuthSuccess }) {
                     <button type="submit" className="auth-button">Sign Up</button>
                 </form>
                 <p className="auth-link">
-                    Already have an account? <NavLink to="/login">Login</NavLink>
+                    Already have an account? <Link to="/login">Login</Link>
                 </p>
             </div>
         </div>
@@ -93,3 +116,4 @@ function Signup({ onAuthSuccess }) {
 }
 
 export default Signup;
+

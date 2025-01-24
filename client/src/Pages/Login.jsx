@@ -1,23 +1,49 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import '../styles/Auth.css'; 
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/Auth.css';
 
 function Login({ onAuthSuccess }) {
     const [formData, setFormData] = useState({
-        username: '',
+        email: '',
         password: ''
     });
     const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    // Check for token on component mount and restore authentication state
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            onAuthSuccess(token); // Update the parent with the stored token
+        }
+    }, [onAuthSuccess]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.username && formData.password) {
-            onAuthSuccess({
-                username: formData.username,
-                // Add other user data as needed
+        setError('');
+
+        try {
+            const response = await fetch('http://localhost:3000/api/v1/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
             });
-        } else {
-            setError('Please fill in all fields');
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Store the token in localStorage
+                localStorage.setItem('token', data.token);
+
+                // Handle successful login
+                onAuthSuccess(data.token);
+            } else {
+                setError(data.message || 'Login failed');
+            }
+        } catch (err) {
+            console.error('Error during login:', err);
+            setError('An error occurred. Please try again later.');
         }
     };
 
@@ -31,17 +57,17 @@ function Login({ onAuthSuccess }) {
     return (
         <div className="auth-container">
             <div className="auth-box">
-                <h2>Login</h2>
+                <h2>Login to SpotHole</h2>
                 {error && <div className="error-message">{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label>Username</label>
+                        <label>Email</label>
                         <input
-                            type="text"
-                            name="username"
-                            value={formData.username}
+                            type="email"
+                            name="email"
+                            value={formData.email}
                             onChange={handleChange}
-                            placeholder="Enter your username"
+                            placeholder="Enter your email"
                         />
                     </div>
                     <div className="form-group">
@@ -57,7 +83,7 @@ function Login({ onAuthSuccess }) {
                     <button type="submit" className="auth-button">Login</button>
                 </form>
                 <p className="auth-link">
-                    Don't have an account? <NavLink to="/signup">Sign up</NavLink>
+                    Don't have an account? <Link to="/signup">Sign up</Link>
                 </p>
             </div>
         </div>

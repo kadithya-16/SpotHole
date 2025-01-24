@@ -29,7 +29,7 @@ const signup = async (req, res) => {
         const newUser = new Users({ name, email, password: hashedPassword });
         await newUser.save();
 
-        res.status(201).json({ message: 'Users registered successfully' });
+        res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {
         console.error('Error during signup:', err);
         res.status(500).json({ message: 'Error occurred during signup' });
@@ -50,7 +50,7 @@ const login =  async (req, res) => {
         // Find the user by email
         const user = await Users.findOne({ email });
         if (!user) {
-            return res.status(401).json({ message: 'Users does not exist' });
+            return res.status(401).json({ message: 'User does not exist' });
         }
 
         // Compare the password with the hashed password
