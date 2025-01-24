@@ -1,4 +1,5 @@
 import React from "react";
+import '../../styles/TeamCard.css'
 
 const TeamCard = ({ image, name, title }) => {
   return (

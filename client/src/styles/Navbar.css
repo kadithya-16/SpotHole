@@ -130,7 +130,7 @@
 }
 
 .icon-container .contact::before {
-    content: " Visit Us →";
+    content: " Let's talk →";
     transition: .2s ease;
 }
 

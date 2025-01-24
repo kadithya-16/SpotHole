@@ -112,23 +112,86 @@
     }
 } */
 
-
-section{
-    margin: 0;padding: 0;
-    min-width: 100vw;
-    min-height: 100vh;
+/* Section Styling */
+.team-section {
+    padding: 20px;
 }
 
-.team-title{
+/* Title Styling */
+/* Section Styling */
+.team-section {
+    padding: 20px;
+}
+
+/* Title Styling */
+.team-title {
     font-size: 150px;
     margin: 0;
-    position: relative;
-    top: -110px;
     text-align: center;
-    color: #333;
+    color: #000000;
     font-family: Boring Sans B Trial;
+    position: relative;
+    top: -100px;
 }
 
-.team-body{
-    /* margin: 0;padding: 0; */
+/* Flexbox Layout for Body */
+.team-body {
+    display: flex;
+    gap: 2rem; /* Space between columns */
 }
+
+/* Sticky Left Column */
+.team-content {
+    flex: 1; /* Takes up 1/4 of the container width */
+    position: relative; /* Required for sticky child to work */
+}
+
+.team-description {
+    position: sticky; /* Sticky positioning */
+    top: 10px; /* Sticks 10px below the top of the viewport */
+    z-index: 10; /* Prevents overlap issues */
+    background-color: white; /* Optional: Prevents overlap with grid */
+    padding: 10px; /* Optional: Adds padding around text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds subtle shadow for clarity */
+}
+
+/* Right Column Grid */
+.team-grid {
+    flex: 3; /* Takes up 3/4 of the container width */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px, 300px)); /* 3-column layout */
+    gap: 2rem; /* Space between grid items */
+    margin-top: 5rem;
+    margin-bottom: 100px;
+}
+
+
+/* 
+.team-content {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+    justify-content: space-around;
+}
+.team-description {
+    position:-webkit-sticky;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 300px;
+}
+
+.team-description p {
+    position: sticky;
+    font-size: 16px;
+    color: gray;
+    margin: 0;
+}
+
+.team-section {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    margin: 0;padding: 0;
+}*/
